@@ -1,0 +1,33 @@
+%div{:id => "fb-root"}
+%h1
+  Client Posting
+
+#facebook-identity
+  %table
+    %tr
+      %td{:id => "picture"}
+      %td{:id => "last-name"}      
+    = link_to "Authorization Url", @authorization_url, :target => "_blank"  
+%script{:src => "//connect.facebook.net/en_US/all.js"}
+:javascript
+  var appId = "#{FACEBOOK_SETTINGS[:api_key]}";
+
+  $(document).ready(function(){
+    FB.init({
+       appId      : appId,
+       status     : true, // check login status
+       cookie     : true, // enable cookies to allow the server to access the session
+       xfbml      : true  // parse XFBML
+     });
+     
+     FB.Event.subscribe('auth.authResponseChange',
+         function(response) {
+             if (response.status == "connected"){
+                FB.api('/me', function(response) {
+                  console.log(response);
+                });
+             }
+         }
+     );          
+    
+  });

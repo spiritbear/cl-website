@@ -1,0 +1,12 @@
+development:
+  api_key: 244764128975808
+  api_secret: befc92590ebff5b20568baee0db9c392
+
+test:
+  api_key: 377493738970976
+  api_secret: 871e0d7682f9c1b69a4e48b08b8d6215
+    
+production:
+  api_key: 103241269814281
+  api_secret: 9f60924029eaa1287a36e3028bf63be8
+    

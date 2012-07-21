@@ -1,0 +1,2 @@
+class FacebookPage < SocialNetworkPage
+end

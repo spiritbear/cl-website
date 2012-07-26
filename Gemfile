@@ -10,6 +10,7 @@ gem 'sass'
 gem 'fb_graph'
 gem 'mysql2'
 gem 'state_machine'
+gem 'authlogic'
 
 
 # Gems used only for assets and not required

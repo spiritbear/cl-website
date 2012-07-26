@@ -52,9 +52,14 @@ ClWebsite::Application.routes.draw do
     match 'hand-written-reviews' => "members#hand_written_reviews", :as => "hand_written_reviews"
   end
   
-  resources :companies do
-    resources :reviews
-  end
+  # resources :companies do
+  #   resources :reviews
+  # end
+
+  resources :reviews
+  
+  match 'reviews/:company_id/:company_slug' => "reviews#index", :as => :reviews_index
+  match 'reviews/:company_id/:company_slug' => "reviews#index", :as => :reviews_index
   
   match 'facebook/authorize_posting' => 'facebook#authorize_posting', :as => :facebook_authorize_posting
   

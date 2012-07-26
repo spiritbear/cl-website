@@ -1,0 +1,2 @@
+class SalesRep < User
+end

@@ -3,11 +3,20 @@
   Client Posting
 
 #facebook-identity
-  %table
-    %tr
-      %td{:id => "picture"}
-      %td{:id => "last-name"}      
-    = link_to "Authorization Url", @authorization_url, :target => "_blank"  
+  - if @authorized == false
+    %label
+      Log in with Facebook:  
+    <fb:login-button length="long" scope="email,publish_stream"></fb:login-button>
+    
+= form_tag( reviews_path, :method => 'post') do
+  = text_field_tag('first_name','')
+  %br
+  = text_field_tag('last_name','')
+  %br
+  = text_field_tag('email','')
+  %br
+  = submit_tag("Submit")
+    
 %script{:src => "//connect.facebook.net/en_US/all.js"}
 :javascript
   var appId = "#{FACEBOOK_SETTINGS[:api_key]}";
@@ -24,7 +33,12 @@
          function(response) {
              if (response.status == "connected"){
                 FB.api('/me', function(response) {
-                  console.log(response);
+                  if(response.email !== undefined){
+                    var keys = new Array('email', 'first_name', 'last_name');
+                    for (i in keys) {
+                      jQuery('#' + keys[i]).val(response[keys[i]]);
+                    }                    
+                  }
                 });
              }
          }

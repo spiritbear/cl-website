@@ -1,0 +1,2 @@
+class CompanyUser < User
+end

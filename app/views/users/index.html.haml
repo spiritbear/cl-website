@@ -1,0 +1,18 @@
+- if @users.present?
+  %table{:class => "table table-bordered"}
+    %thead
+      %th ID
+      %th Full Name
+      %th Email
+      %th Manager
+      %th Actions
+    - @users.each do |user|
+      %tr
+        %td= user.id
+        %td= user.full_name
+        %td= user.email
+        %td= user.manager == true ? "Yes" : "No"
+        %td
+          = link_to "Delete", "#"
+          |
+          = link_to "Edit", "#"

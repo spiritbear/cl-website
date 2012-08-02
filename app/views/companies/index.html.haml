@@ -1,0 +1,46 @@
+= form_tag(companies_path, :method => :post) do
+  = label_tag "First Name"
+  = text_field_tag('invite[][first_name]')
+  = label_tag "Last Name"
+  = text_field_tag('invite[][last_name]')
+  = label_tag "Email"
+  = text_field_tag('invite[][email]')
+  %hr
+  = label_tag "First Name"
+  = text_field_tag('invite[][first_name]')
+  = label_tag "Last Name"
+  = text_field_tag('invite[][last_name]')
+  = label_tag "Email"
+  = text_field_tag('invite[][email]')
+  %hr
+  = submit_tag("Send Invites")
+
+  
+%a{:href => "#add-invite-modal" ,:'data-toggle' => "modal"}
+  Add a New Invite
+  
+#add-invite-modal.hide.modal
+  .modal-header
+    %h2
+      Add a New Invite
+    %button.close{:'data-dismiss' => "modal"}
+  .modal-body
+    = form_tag(companies_path, :method => :post, :class => "form-horizontal") do
+      %fieldset
+        .control-group
+          = label_tag "first_name", "First Name", :class => "control-label"
+          .controls
+            = text_field_tag('invite[][first_name]','', :class => "input-xlarge focused")
+        .control-group  
+          = label_tag "last_name", "Last Name", :class => "control-label"
+          .controls
+            = text_field_tag('invite[][last_name]', '', :class => "input-xlarge focused")
+        .control-group  
+          = label_tag "email", "Email", :class => "control-label"
+          .controls
+            = text_field_tag('invite[][email]', '', :class => "input-xlarge focused")
+
+:javascript
+  $(document).ready(function(){
+    // $("#add-invite-modal").modal();
+  })

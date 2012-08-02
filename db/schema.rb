@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726215409) do
+ActiveRecord::Schema.define(:version => 20120802213144) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "categories_companies", :id => false, :force => true do |t|
+    t.integer "category_id"
+    t.integer "company_id"
+  end
 
   create_table "companies", :force => true do |t|
     t.string   "name",              :null => false
@@ -37,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120726215409) do
   end
 
   create_table "customers", :force => true do |t|
+    t.integer  "company_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "day_phone_number"
@@ -80,6 +92,14 @@ ActiveRecord::Schema.define(:version => 20120726215409) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "review_ratings", :force => true do |t|
+    t.integer  "review_id"
+    t.float    "score"
+    t.string   "ip_address"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "reviews", :force => true do |t|
     t.integer  "company_id"
     t.integer  "customer_id"
@@ -111,6 +131,30 @@ ActiveRecord::Schema.define(:version => 20120726215409) do
     t.datetime "updated_at",          :null => false
   end
 
+  create_table "stats", :force => true do |t|
+    t.integer  "company_id"
+    t.date     "month_id"
+    t.integer  "logo_views_count",          :default => 0
+    t.integer  "pages_view_count",          :default => 0
+    t.integer  "new_reviews_count",         :default => 0
+    t.integer  "total_reviews_count",       :default => 0
+    t.integer  "reviews_view_count",        :default => 0
+    t.float    "view_conversion",           :default => 0.0
+    t.float    "new_reviews_average_score", :default => 0.0
+    t.float    "approval_rating",           :default => 0.0
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "company_id"
+    t.datetime "last_checked_at"
+    t.string   "state"
+    t.text     "note"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "syndication_posts", :force => true do |t|
     t.integer  "social_network_page_id"
     t.integer  "review_id"
@@ -139,6 +183,9 @@ ActiveRecord::Schema.define(:version => 20120726215409) do
     t.datetime "last_login_at"
     t.string   "last_login_ip"
     t.integer  "sales_team_id"
+    t.boolean  "manager",             :default => false
+    t.boolean  "primary_contact",     :default => false
+    t.boolean  "accepts_terms",       :default => false
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end

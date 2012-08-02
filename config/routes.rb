@@ -1,4 +1,6 @@
 ClWebsite::Application.routes.draw do
+  get "companies/index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,6 +50,7 @@ ClWebsite::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
+  resources :users
   resources :members do
     match 'hand-written-reviews' => "members#hand_written_reviews", :as => "hand_written_reviews"
   end
@@ -56,7 +59,10 @@ ClWebsite::Application.routes.draw do
   #   resources :reviews
   # end
 
-  resources :reviews
+  resources :companies
+  resources :reviews do
+    match 'rate' => "reviews#rate", :as => :rate
+  end
   
   match 'reviews/:company_id/:company_slug' => "reviews#index", :as => :reviews_index
   match 'reviews/:company_id/:company_slug' => "reviews#index", :as => :reviews_index

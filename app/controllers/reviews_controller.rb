@@ -37,4 +37,14 @@ class ReviewsController < ApplicationController
     end
     render :text => "Ok"
   end
+  
+  def rate
+    params[:score] = params[:score] / 5.0
+    params[:ip_address] = request.ip
+    
+    @review = Review.find(params[:review_id])
+    @review.review_ratings.create(params)
+    
+    render :text => "Ol"
+  end
 end

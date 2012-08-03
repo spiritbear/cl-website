@@ -4,7 +4,8 @@ class Review < ActiveRecord::Base
   belongs_to :customer
   has_many :review_ratings
   scope :published, where(:state => "published")
-  scope :unpublished, where(:state => "unpublished")
+  scope :rejected, where(:state => "rejected")
+  scope :pending,  where(:state => "pending")
   
   
   def publish?

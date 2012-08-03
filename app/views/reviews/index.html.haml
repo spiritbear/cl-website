@@ -1,0 +1,22 @@
+- @review_topics.each do |rt|
+  = rt.title
+  = review_stars(rt.average_score)
+  %br
+  
+%br
+%br  
+%table  
+  - @reviews.each do |review|
+    %tr
+      %td.review-star-td
+        = review_stars(review.average_score)
+      %td.review-summary-td
+        = review.summary
+    %tr
+      %td.review-star-td  
+        Shiv Indap
+      %td.review-summary-text-td
+        = truncate(review.content, :length => 100)
+    %tr
+      %td{:style => "padding:10px;"}
+      %td  

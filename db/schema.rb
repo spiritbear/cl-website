@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120802213144) do
+ActiveRecord::Schema.define(:version => 20120803214931) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -64,6 +64,13 @@ ActiveRecord::Schema.define(:version => 20120802213144) do
     t.datetime "updated_at",        :null => false
   end
 
+  create_table "default_review_topics", :force => true do |t|
+    t.string   "title",      :null => false
+    t.integer  "sort_order"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "email_templates", :force => true do |t|
     t.string   "category"
     t.string   "from_email"
@@ -94,10 +101,20 @@ ActiveRecord::Schema.define(:version => 20120802213144) do
 
   create_table "review_ratings", :force => true do |t|
     t.integer  "review_id"
+    t.float    "review_topic_id", :default => 0.0, :null => false
     t.float    "score"
     t.string   "ip_address"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "review_topics", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "default_review_topic_id"
+    t.string   "state"
+    t.float    "average_score"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "reviews", :force => true do |t|
@@ -105,10 +122,14 @@ ActiveRecord::Schema.define(:version => 20120802213144) do
     t.integer  "customer_id"
     t.text     "summary"
     t.text     "content"
+    t.float    "average_score",  :default => 0.0
     t.date     "written_date"
     t.string   "state"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "ip_address"
+    t.string   "reviewer_state"
+    t.string   "reviewer_city"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "sales_teams", :force => true do |t|

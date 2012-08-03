@@ -47,4 +47,11 @@ class ReviewsController < ApplicationController
     
     render :text => "Ol"
   end
+  
+  def index
+    @company = Company.first
+    @review_topics = @company.average_scores_by_topics
+    @reviews = @company.reviews.published.order("reviews.created_at DESC")
+    
+  end
 end

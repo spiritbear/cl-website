@@ -3,6 +3,8 @@ class Review < ActiveRecord::Base
   belongs_to :company
   belongs_to :customer
   has_many :review_ratings
+  has_many :questions
+  
   scope :published, where(:state => "published")
   scope :rejected, where(:state => "rejected")
   scope :pending,  where(:state => "pending")

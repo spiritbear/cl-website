@@ -55,15 +55,18 @@ ClWebsite::Application.routes.draw do
     match 'hand-written-reviews' => "members#hand_written_reviews", :as => "hand_written_reviews"
   end
   
-  # resources :companies do
-  #   resources :reviews
-  # end
+  resources :companies do
+    resources :reviews do
+    end
+  end
 
   resources :companies
   resources :reviews do
     match 'rate' => "reviews#rate", :as => :rate
+    resources :questions
   end
-  
+
+  match 'reviews/ask-reviewer/:review_id' => "questions#new", :as => :reviews_ask_reviewer    
   match 'reviews/:company_id/:company_slug' => "reviews#index", :as => :reviews_index
   match 'reviews/:company_id/:company_slug' => "reviews#index", :as => :reviews_index
   

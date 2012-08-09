@@ -1,0 +1,18 @@
+%h1
+  Ask the Reviewer&trade; a Question
+  
+= form_for @question, :url => review_questions_path(@review) do |f|
+  = f.label :first_name, "First Name"
+  = f.text_field :first_name
+  = f.label :last_name, "Last Name"
+  = f.text_field :last_name
+  = f.label :email, "Email"
+  = f.text_field :email
+  = f.label :question, "Question"
+  = f.text_area :question
+  %br
+  = f.submit "Submit"
+  
+  
+
+  

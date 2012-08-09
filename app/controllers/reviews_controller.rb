@@ -51,7 +51,8 @@ class ReviewsController < ApplicationController
   def index
     @company = Company.first
     @review_topics = @company.average_scores_by_topics
-    @reviews = @company.reviews.published.order("reviews.created_at DESC")
-    
+    @reviews = @company.reviews.published.order("reviews.created_at DESC")    
   end
+  
+  
 end
